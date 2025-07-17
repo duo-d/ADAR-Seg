@@ -1,0 +1,4 @@
+sensor_msgs/PointCloud2 input
+---
+sensor_msgs/PointCloud2 trav_points
+sensor_msgs/PointCloud2 no_trav_points

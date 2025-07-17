@@ -1,0 +1,38 @@
+<!-- Archivo launch para lanzar el plugin de rviz_satellite y ver el mapa + el HUSKY-->
+<launch>
+
+<!-- CONFIGURACION -->
+    <!-- ORIGEN MAPA -->
+    <node pkg="rostopic" type="rostopic" name="fake_gps_fix" args="pub /gps/fix sensor_msgs/NavSatFix --latch --file=$(find control_system)/include/rviz_satellite/launch/demo.gps" />
+
+    <!-- RVIZ -->
+    <node pkg="rviz" type="rviz" name="rviz" args="-d $(find control_system)/config/demo.rviz"/>
+
+<!-- HUSKY  -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <!-- <arg name="world_name" value="$(find simulation)/worlds/campus.world"/>    -->
+    <arg name="world_name" value="$false"/>  
+    <arg name="paused" value="false"/>
+    <arg name="use_sim_time" value="true"/>
+    <arg name="gui" value="false"/>
+    <arg name="headless" value="false"/>
+    <arg name="debug" value="false"/>
+  </include>
+
+  <!-- <include file="$(find simulation)/launch/spawn_husky.launch"> -->
+    <include file="$(find husky_gazebo)/launch/spawn_husky.launch">
+    </include>
+
+  <!-- CLICKED POINT TO PATH -->
+    <!-- <node name="nombre_del_nodo" pkg="control_sys" type="src/clicked_point_to_path.py" output="screen"/>   -->
+    <!-- <node pkg="control_sys" type="clicked_point_to_path" name="cpt" /> -->
+
+
+  <!-- TRANSFORMADAS -->
+    <!-- MAP-ODOM  ODOM-BASE_LINK -->
+    <node pkg="tf2_ros" type="static_transform_publisher" name="odom_base_link" args="0 0 0 0 0 0 odom base_link" />
+   <!--  <node pkg="tf2_ros" type="static_transform_publisher" name="fake_map" args="0 0 0 0.024 0 0 map odom" /> -->
+    <node pkg="tf2_ros" type="static_transform_publisher" name="fake_map" args="0 0 0 0 0 0 map odom" /> 
+    <!-- rotacion de 0.024 radianes en el eje X para aquellos objetos que se coloquen en map -->
+
+</launch>

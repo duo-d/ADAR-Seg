@@ -1,0 +1,25 @@
+latitud_ref: 38.27520312016666 #38.275401
+longitud_ref: -0.685260804833333 #-0.686178
+
+kd: 0.175
+kang: 0.25
+
+vmin: 0.25
+vmax: 0.35 
+wmin: -0.35
+wmax: 0.35
+
+precision: 0.85  #metros 
+
+#CLICKED_POINT:
+input_osm_file: "../include/path_planning/osms/export.osm"
+plot_route: false            #Quieres que se muestre la ruta en openstreetmap
+output_csv: true
+clicked_path_folder: "../include/path_planning/csv_routes/"
+
+#PARA ROSBAG:
+csv_rosbag: 'include/path_planning/csv_routes/rosbag2.csv'       # Ruta del archivo con las coordenadas
+dist_muestreo: 4    #metros 
+follow_reverse: false
+recover_route: false
+draw_path: false
